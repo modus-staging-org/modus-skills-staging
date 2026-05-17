@@ -1,0 +1,32 @@
+name: Validate Modus Manifests
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Modus Manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Collect changed manifest files
+        id: changed
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          head="${{ github.event.pull_request.head.sha }}"
+          files=$(git diff --name-only --diff-filter=ACMR "$base" "$head" -- '.modus/manifest.yaml' '.modus/skills/*.yaml' '.modus/agents/*.yaml')
+          echo "files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$files" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+      - name: Validate
+        if: steps.changed.outputs.files != ''
+        run: |
+          echo "${{ steps.changed.outputs.files }}" | sed '/^$/d' | xargs -r -d '\n' -- npx --yes @modus/skill-agent-manifests validate --
