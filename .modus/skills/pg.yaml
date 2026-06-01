@@ -11,17 +11,22 @@ spec:
   toolset:
     sql_runner:
       - SELECT:3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb:postgres:saas_subscription_and_churn_analytics_dataset_demo
+      - SELECT:3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb:postgres:uveye
   supervision:
     subordinates: []
   connections:
     - connectionUid: 3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb
+      contextPreferences:
+        path:
+          - postgres
+          - uveye
   contexts:
     - kind: query
       query:
         rules:
           - rules:
               - field: data_asset
-                value: 3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb:postgres/saas_subscription_and_churn_analytics_dataset_demo
+                value: 3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb:postgres/uveye
                 operator: in
               - field: verification_status
                 value: positive,neutral
