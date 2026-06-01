@@ -15,10 +15,6 @@ spec:
     subordinates: []
   connections:
     - connectionUid: 3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb
-      contextPreferences:
-        path:
-          - postgres
-          - saas_subscription_and_churn_analytics_dataset_demo
   contexts:
     - kind: query
       query:
@@ -45,6 +41,8 @@ spec:
         use: true
         manage: true
     guardrails: []
+    ownerUserId: null
+    ownerEmail: null
   interfaces:
     - id: interface_1777988863837
       type: mcp
