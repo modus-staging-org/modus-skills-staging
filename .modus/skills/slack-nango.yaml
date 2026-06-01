@@ -1,0 +1,80 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: 78259177-12ab-4ab7-b89e-46f9be44988c
+  name: slack - nango
+spec:
+  description: slack - nango
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.5
+  instructions: []
+  toolset:
+    slack:
+      actions:
+        - SendMessage
+        - ListChannels
+        - ListCustomEmoji
+        - ListFiles
+        - ListPins
+        - ListScheduledMessages
+        - ListUserGroupMembers
+        - ListUserGroups
+        - ListUserReactions
+        - ListUsers
+        - GetChannelInfo
+        - GetChannelMembers
+        - GetConversationHistory
+        - GetDndInfo
+        - GetFileInfo
+        - GetReactions
+        - GetTeamInfo
+        - GetThreadReplies
+        - GetUserInfo
+        - GetUserPresence
+        - GetUserProfile
+        - CompleteUpload
+        - GetUploadUrl
+        - SendFiles
+  supervision:
+    subordinates: []
+  connections:
+    - connectionUid: 84512b85-834e-4fa8-aa9b-48c2f85a8cea
+      contextPreferences:
+        path: []
+  contexts:
+    - kind: query
+      query:
+        rules:
+          - rules:
+              - field: data_asset
+                value: "84512b85-834e-4fa8-aa9b-48c2f85a8cea:"
+                operator: in
+              - field: verification_status
+                value: positive,neutral
+                operator: in
+            combinator: and
+        combinator: or
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces:
+    - id: interface_1771323731462
+      type: slack
+      name: Modus slack
+      config:
+        accessMode: allow-org
+        allowedEmails: []
+      secretRefs: {}
+    - id: interface_1777983519154
+      type: mcp
+      name: MCP Server
+      config:
+        tokens:
+          - tokenId: f3b276bd-d65b-4b8a-b755-964059cac8a1
+            createdAt: 2026-05-05T12:18:40.539Z
+            tokenPrefix: 1d04eca1ceb0cc34
+      secretRefs: {}
+  evaluations: []

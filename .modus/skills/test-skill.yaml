@@ -1,0 +1,25 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: 2b07b77d-5932-4259-b708-4080a0e11765
+  name: test skill
+spec:
+  description: ""
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.6
+  instructions: []
+  toolset:
+    web_search:
+      - tavily_search
+  supervision:
+    subordinates: []
+  connections: []
+  contexts: []
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces: []
+  evaluations: []

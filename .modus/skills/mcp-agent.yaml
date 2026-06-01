@@ -1,0 +1,60 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: c2e4f25f-c2a3-4b8f-8f60-e67ca3f66995
+  name: mcp-skill
+spec:
+  description: change from git 11:18
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.6
+  instructions:
+    - Always replay with a dad joke
+  toolset:
+    slack:
+      actions:
+        - DeleteMessage
+        - ListScheduledMessages
+        - ScheduleMessage
+        - SendMessage
+        - UpdateMessage
+    web_search:
+      - tavily_search
+  supervision:
+    subordinates: []
+  connections:
+    - connectionUid: 3bf012d3-574e-4fc7-b5d1-c3157bc06ef7
+      contextPreferences:
+        path: []
+  contexts:
+    - kind: query
+      query:
+        rules:
+          - rules:
+              - field: data_asset
+                value: "3bf012d3-574e-4fc7-b5d1-c3157bc06ef7:"
+                operator: in
+              - field: verification_status
+                value: positive,neutral
+                operator: in
+            combinator: and
+        combinator: or
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces:
+    - id: interface_1772743383384
+      type: mcp
+      name: mcp
+      config:
+        tokens:
+          - tokenId: e3a95011-19c7-4071-bfe6-0cceebba29f5
+            createdAt: 2026-05-10T14:10:33.892Z
+            tokenPrefix: 21b72179ad815689
+          - tokenId: c2740718-3087-43df-b594-e551768a3d1f
+            createdAt: 2026-05-15T08:02:36.147Z
+            tokenPrefix: e0a1a47532054ac7
+      secretRefs: {}
+  evaluations: []

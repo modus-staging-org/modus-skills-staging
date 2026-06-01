@@ -1,0 +1,24 @@
+apiVersion: modus.dev/v1
+kind: Agent
+metadata:
+  externalUid: 6752f63a-737c-4819-b661-7093dc8c0cc2
+  name: mcp-agent
+spec:
+  type: task
+  description: ""
+  trigger:
+    type: manual
+  agentSelection:
+    agents: []
+  workflowStructure:
+    nodes: []
+    edges: []
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+    ownerUserId: user_394iVT1ubV3OXrGmIqI0a8QrXLP
+    ownerEmail: eladdo@modus.direct
+  interfaces: []

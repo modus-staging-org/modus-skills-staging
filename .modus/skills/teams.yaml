@@ -1,0 +1,57 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: c1f52458-9568-466f-bae9-6f64f9321ee9
+  name: Teams
+spec:
+  description: ""
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.6
+  instructions: []
+  toolset:
+    teams:
+      rules:
+        allowedChannelIds:
+          - 19:e2d7fdfdab3e4bb8bbff16995c55e1b6@thread.tacv2
+        allowedChannelNames:
+          19:e2d7fdfdab3e4bb8bbff16995c55e1b6@thread.tacv2: Modus Artificial Intelligence Ltd. / test
+      actions:
+        - GetChannelAllMembers
+        - GetChannelInfo
+        - GetChannelMembers
+        - GetConversationHistory
+        - GetThreadReplies
+        - ListChannels
+        - GetTeamMembers
+        - ListTeams
+        - GetUserInfo
+        - ListUsers
+        - GetTenantInfo
+        - SendBotMessage
+  supervision:
+    subordinates: []
+  connections:
+    - connectionUid: 609dad85-2ba6-439e-9b2a-fec6866a4a5d
+      contextPreferences:
+        path: []
+  contexts:
+    - kind: query
+      query:
+        rules:
+          - rules:
+              - field: data_asset
+                value: "609dad85-2ba6-439e-9b2a-fec6866a4a5d:"
+                operator: in
+              - field: verification_status
+                value: positive,neutral
+                operator: in
+            combinator: and
+        combinator: or
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces: []
+  evaluations: []

@@ -1,0 +1,65 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: 9d4cf94e-fe37-4fda-aa3c-13fe23bc65d1
+  name: test-tool-web-slack
+spec:
+  description: ""
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.6
+  instructions: []
+  toolset:
+    slack:
+      actions:
+        - ArchiveChannel
+        - CreateChannel
+        - GetChannelInfo
+        - GetChannelMembers
+        - GetConversationHistory
+        - GetThreadReplies
+        - InviteToChannel
+        - JoinChannel
+        - LeaveChannel
+        - ListChannels
+        - MarkAsRead
+        - OpenDm
+        - RemoveFromChannel
+        - RenameChannel
+        - SetChannelPurpose
+        - SetChannelTopic
+        - DeleteMessage
+        - ListScheduledMessages
+        - ScheduleMessage
+        - SendMessage
+        - UpdateMessage
+    web_search:
+      - tavily_search
+  supervision:
+    subordinates: []
+  connections:
+    - connectionUid: 3bf012d3-574e-4fc7-b5d1-c3157bc06ef7
+      contextPreferences:
+        path: []
+  contexts:
+    - kind: query
+      query:
+        rules:
+          - rules:
+              - field: data_asset
+                value: "3bf012d3-574e-4fc7-b5d1-c3157bc06ef7:"
+                operator: in
+              - field: verification_status
+                value: positive,neutral
+                operator: in
+            combinator: and
+        combinator: or
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+    ownerUserId: user_394iVT1ubV3OXrGmIqI0a8QrXLP
+    ownerEmail: eladdo@modus.direct
+  interfaces: []
+  evaluations: []

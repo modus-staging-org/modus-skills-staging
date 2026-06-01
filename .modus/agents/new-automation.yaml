@@ -1,0 +1,27 @@
+apiVersion: modus.dev/v1
+kind: Agent
+metadata:
+  externalUid: 5b3d3b37-46a3-4793-a69a-02736ffb43a8
+  name: New Automation
+spec:
+  type: task
+  description: ""
+  trigger:
+    type: manual
+  agentSelection:
+    agents:
+      - skill: test-skill
+        priorityOrder: 1
+    model: claude-sonnet-4.6
+  workflowStructure:
+    nodes: []
+    edges: []
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+    ownerUserId: user_394iVT1ubV3OXrGmIqI0a8QrXLP
+    ownerEmail: eladdo@modus.direct
+  interfaces: []

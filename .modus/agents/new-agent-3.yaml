@@ -1,0 +1,76 @@
+apiVersion: modus.dev/v1
+kind: Agent
+metadata:
+  externalUid: 5359e1f9-c891-4c46-979f-e543b7ae860c
+  name: api call
+spec:
+  type: workflow
+  description: Daily at 11:45 AM
+  trigger:
+    type: schedule
+    schedule:
+      frequency: daily
+      timeOfDay: 11:45
+      timezone: Asia/Jerusalem
+  agentSelection:
+    agents: []
+  workflowStructure:
+    nodes:
+      - id: "1"
+        data:
+          label: Start Automation
+          trigger:
+            schedule:
+              timezone: Asia/Jerusalem
+              weekdays: null
+              frequency: daily
+              time_of_day: 11:45
+              day_of_month: null
+              cron_description: null
+              cron_expressions: null
+            trigger_type: schedule
+          description: Daily at 11:45 AM
+        type: start
+        position:
+          x: 0
+          y: 50
+      - id: node_1779785012065_1001
+        data:
+          label: Action Node
+          action:
+            tool_id: api_call
+            tool_name: API call
+            action_key: null
+            action_name: null
+            runtime_scope:
+              kind: api_call
+              request:
+                url: https://dummyjson.com/auth/me
+                method: GET
+                headers:
+                  - kind: secret
+                    name: Authorization
+                    secretRef:
+                      id: modus/org_39TV09xUy1UyuCT8KxqnrJFIpHF/api_call_secret/bf9e4f0371d6c015
+                      source: aws-secrets-manager
+                timeoutSeconds: 10
+            configuredProps: null
+            action_description: null
+          description: "API call: Describe action"
+        type: action
+        position:
+          x: 0
+          y: 210
+    edges:
+      - id: e_1_out_node_1779785012065_1001
+        source: "1"
+        target: node_1779785012065_1001
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+    ownerUserId: user_394iVT1ubV3OXrGmIqI0a8QrXLP
+    ownerEmail: eladdo@modus.direct
+  interfaces: []

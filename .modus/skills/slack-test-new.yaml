@@ -1,0 +1,57 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: e590666c-224e-4e78-ba01-ac68e57a0951
+  name: slack-test-new
+spec:
+  description: slack-test-new
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.5
+  instructions: []
+  toolset:
+    slack:
+      actions:
+        - GetChannelInfo
+        - GetChannelMembers
+        - GetConversationHistory
+        - GetDndInfo
+        - GetFileInfo
+        - GetReactions
+        - GetTeamInfo
+        - GetThreadReplies
+        - GetUserInfo
+        - GetUserPresence
+        - GetUserProfile
+        - ListChannels
+        - ListCustomEmoji
+        - ListFiles
+        - ListPins
+        - ListScheduledMessages
+        - ListUserGroupMembers
+        - ListUserGroups
+        - ListUserReactions
+        - ListUsers
+        - SendMessage
+    visualization_creator:
+      - matplotlib
+  supervision:
+    subordinates: []
+  connections: []
+  contexts:
+    - kind: query
+      query:
+        rules: []
+        combinator: or
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces:
+    - id: interface_1773573587542
+      type: slack
+      name: slack
+      config: {}
+      secretRefs: {}
+  evaluations: []

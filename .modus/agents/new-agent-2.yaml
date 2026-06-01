@@ -1,0 +1,131 @@
+apiVersion: modus.dev/v1
+kind: Agent
+metadata:
+  externalUid: 0a52fcc7-848b-4616-8d21-e7b2f883c688
+  name: New Agent
+spec:
+  type: workflow
+  description: Daily at 1:48 PM
+  trigger:
+    type: schedule
+    schedule:
+      frequency: daily
+      timeOfDay: 13:48
+      timezone: Asia/Jerusalem
+  agentSelection:
+    agents: []
+  workflowStructure:
+    nodes:
+      - id: "1"
+        data:
+          label: Start Automation
+          trigger:
+            schedule:
+              timezone: Asia/Jerusalem
+              weekdays: null
+              frequency: daily
+              time_of_day: 13:48
+              day_of_month: null
+              cron_description: null
+              cron_expressions: null
+            trigger_type: schedule
+          description: Daily at 1:48 PM
+        type: start
+        position:
+          x: -7
+          y: -98
+      - id: node_1777894248135_1000
+        data:
+          agent:
+            task: what is the current date?
+            model: claude-sonnet-4.6
+            agent_id: 67
+            agent_ids:
+              - 67
+          label: Agent Node
+          description: slack-test-new
+        type: agent
+        position:
+          x: -7
+          y: 60.961306532663315
+      - id: node_1777894262468_1001
+        data:
+          label: Condition Node
+          condition:
+            branches:
+              - id: "1"
+                text: it is May?
+              - id: "2"
+                text: is it April?
+            branch_type: ai_condition
+          description: AI Condition (2 branches)
+        type: condition
+        position:
+          x: -7
+          y: 222
+      - id: node_1777894281896_1002
+        data:
+          label: Action Node
+          action:
+            tool_id: slack
+            tool_name: Slack Integration
+            action_key: null
+            action_name: null
+            runtime_scope:
+              kind: nango
+              toolId: slack
+              actions:
+                - SendMessage
+              connectionId: b86069fe-8030-40af-b8f0-9e1436dafaf7
+            ai_description: send "this is May" to channel "test-2-"
+            configuredProps: null
+            action_description: null
+          description: 'Slack Integration: send "this is May" to channel "test-2-"'
+        type: action
+        position:
+          x: -168
+          y: 416
+      - id: node_1777894325741_1003
+        data:
+          label: Action Node
+          action:
+            tool_id: slack
+            tool_name: Slack Integration
+            action_key: null
+            action_name: null
+            runtime_scope:
+              kind: nango
+              toolId: slack
+              actions:
+                - SendMessage
+              connectionId: b86069fe-8030-40af-b8f0-9e1436dafaf7
+            ai_description: send "this is April" to channel "test-2-"
+            configuredProps: null
+            action_description: null
+          description: 'Slack Integration: send "this is April" to channel "test-2-"'
+        type: action
+        position:
+          x: 133
+          y: 413
+    edges:
+      - id: e_1_out_node_1777894248135_1000
+        source: "1"
+        target: node_1777894248135_1000
+      - id: e_node_1777894248135_1000_out_node_1777894262468_1001
+        source: node_1777894248135_1000
+        target: node_1777894262468_1001
+      - id: e_node_1777894262468_1001_branch_0_node_1777894281896_1002
+        source: node_1777894262468_1001
+        target: node_1777894281896_1002
+        sourceHandle: branch_0
+      - id: e_node_1777894262468_1001_branch_1_node_1777894325741_1003
+        source: node_1777894262468_1001
+        target: node_1777894325741_1003
+        sourceHandle: branch_1
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces: []

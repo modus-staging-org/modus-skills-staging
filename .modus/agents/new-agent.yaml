@@ -1,0 +1,61 @@
+apiVersion: modus.dev/v1
+kind: Agent
+metadata:
+  externalUid: 65ff67b6-5b2d-473f-b3e9-8da5d2f92b06
+  name: New Agent
+spec:
+  type: workflow
+  description: Daily at 11:31 AM
+  trigger:
+    type: schedule
+    schedule:
+      frequency: daily
+      timeOfDay: 11:31
+      timezone: Asia/Jerusalem
+  agentSelection:
+    agents: []
+  workflowStructure:
+    nodes:
+      - id: "1"
+        data:
+          label: Start Automation
+          trigger:
+            schedule:
+              timezone: Asia/Jerusalem
+              weekdays: null
+              frequency: daily
+              time_of_day: 11:31
+              day_of_month: null
+              cron_description: null
+              cron_expressions: null
+            trigger_type: schedule
+          description: Daily at 11:31 AM
+        type: start
+        position:
+          x: 0
+          y: 50
+      - id: node_1778833104889_1000
+        data:
+          agent:
+            task: send "hi" to channel "C0AMA621SUW"
+            model: claude-sonnet-4.6
+            agent_id: 233
+            agent_ids:
+              - 233
+          label: Agent Node
+          description: test-tool-web-slack
+        type: agent
+        position:
+          x: 0
+          y: 209
+    edges:
+      - id: e_1_out_node_1778833104889_1000
+        source: "1"
+        target: node_1778833104889_1000
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces: []

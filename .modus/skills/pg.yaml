@@ -1,0 +1,58 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: d11fcec5-a258-43df-9da2-7c5cc8c2a266
+  name: pg
+spec:
+  description: ""
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.6
+  instructions: []
+  toolset:
+    sql_runner:
+      - SELECT:3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb:postgres:saas_subscription_and_churn_analytics_dataset_demo
+  supervision:
+    subordinates: []
+  connections:
+    - connectionUid: 3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb
+      contextPreferences:
+        path:
+          - postgres
+          - saas_subscription_and_churn_analytics_dataset_demo
+  contexts:
+    - kind: query
+      query:
+        rules:
+          - rules:
+              - field: data_asset
+                value: 3f66c4bf-fcb2-4ad2-9b36-1d06b9aadecb:postgres/saas_subscription_and_churn_analytics_dataset_demo
+                operator: in
+              - field: verification_status
+                value: positive,neutral
+                operator: in
+            combinator: and
+        combinator: or
+    - kind: static_ids
+      staticIds:
+        - 8ee4b2b9-26ac-4635-b9a8-e51e1f7a63e2
+      selectedItems:
+        - uid: 8ee4b2b9-26ac-4635-b9a8-e51e1f7a63e2
+          label: Untitled
+          contextType: files
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+  interfaces:
+    - id: interface_1777988863837
+      type: mcp
+      name: MCP Server
+      config:
+        tokens:
+          - tokenId: 0c73310e-8e97-43cd-90a5-1a8749f81e12
+            createdAt: 2026-05-05T13:47:48.403Z
+            tokenPrefix: b405359b0c2c622f
+      secretRefs: {}
+  evaluations: []
