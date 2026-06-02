@@ -1,0 +1,25 @@
+apiVersion: modus.dev/v1
+kind: Skill
+metadata:
+  externalUid: 47d638f0-ab95-41ec-9453-9d8f3e180516
+  name: composio
+spec:
+  description: ""
+  expectedOutput: ""
+  model: anthropic/claude-sonnet-4.6
+  instructions: []
+  toolset: {}
+  supervision:
+    subordinates: []
+  connections: []
+  contexts: []
+  access:
+    groupPermissions:
+      __everyone__:
+        use: true
+        manage: true
+    guardrails: []
+    ownerUserId: user_394iVT1ubV3OXrGmIqI0a8QrXLP
+    ownerEmail: eladdo@modus.direct
+  interfaces: []
+  evaluations: []
